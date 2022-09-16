@@ -5,8 +5,8 @@ while you run this software. If you don't use a virtual audio cable to connect
 the output (speaker jack) to the input (default microphone jack), consider
 running an actual cable to connect these two.
 """
-
-from PyQt4 import QtGui,QtCore
+from PyQt5 import QtCore, QtGui, QtWidgets
+# from PyQt5 import QtGui,QtCore
 import sys
 import ui_main
 import numpy as np
@@ -15,15 +15,15 @@ import swhear
 import time
 import pyqtgraph.exporters
 import webbrowser
-
-class ExampleApp(QtGui.QMainWindow, ui_main.Ui_MainWindow):
+# QtWidgets.QMainWindow, UI.MainUI.Ui_MainWindow
+class ExampleApp(QtWidgets.QMainWindow, ui_main.Ui_MainWindow):
     def __init__(self, parent=None):
         pyqtgraph.setConfigOption('background', 'w') #before loading widget
         super(ExampleApp, self).__init__(parent)
         self.setupUi(self)
         self.grECG.plotItem.showGrid(True, True, 0.7)
         self.btnSave.clicked.connect(self.saveFig)
-        self.btnSite.clicked.connect(self.website)
+        # self.btnSite.clicked.connect(self.website)
         stamp="DIY ECG by Scott Harden"
         self.stamp = pyqtgraph.TextItem(stamp,anchor=(-.01,1),color=(150,150,150),
                                         fill=pyqtgraph.mkBrush('w'))
@@ -67,13 +67,13 @@ class ExampleApp(QtGui.QMainWindow, ui_main.Ui_MainWindow):
             timeTook=(time.time()-t1)*1000
             print("plotting took %.02f ms"%(timeTook))
         msTillUpdate=int(self.ear.chunk/self.ear.rate*1000)-timeTook
-        QtCore.QTimer.singleShot(max(0,msTillUpdate), self.update)
+        QtCore.QTimer.singleShot(int(max(0,msTillUpdate)), self.update)
 
-    def website(self):
-        webbrowser.open("http://www.SWHarden.com")
+    # def website(self):
+    #     webbrowser.open("http://www.SWHarden.com")
 
 if __name__=="__main__":
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     form = ExampleApp()
     form.show()
     app.exec_()

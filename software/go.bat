@@ -1,2 +1,2 @@
-"C:\Users\scott\Documents\important\WinPython-64bit-3.5.2.1\python-3.5.2.amd64\python.exe" go.py
+"C:\Users\minhye5839\Documents\WPy64-31050\python-3.10.5.amd64\python.exe" go.py
 pause
